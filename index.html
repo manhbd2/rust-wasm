@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rust Wasm Test</title>
+  </head>
+  <body>
+    <h1>Rust + Wasm</h1>
+    <button id="run">Say Hello</button>
+    <script type="module">
+      import init, { greet } from "./my_wasm_project.js";
+      try {
+        async function run() {
+          await init();
+          document.getElementById("run").onclick = () => {
+            alert(greet("Manh Bui"));
+          };
+        }
+        run();
+      } catch (error) {
+        alert(error);
+      }
+    </script>
+  </body>
+</html>
