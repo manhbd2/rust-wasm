@@ -8,14 +8,11 @@
     <script src="hello.js"></script>
     <script>
       try {
-        createModule().then(Module => {
-          const greet = Module.cwrap('greet', 'string', ['string']);
-          const result = greet("Manh Bui");
-          alert(result)
-        }).catch(error => {
-          alert("1")
-          alert(error)
-        });
+        window.onload = async function () {
+          await window.init();
+          const result = window.encrypted("tt0944947");
+          alert(result);
+        }
       } catch (error) {
         alert("2")
         alert(error)
