@@ -11,9 +11,7 @@
       try {
         async function run() {
           await init();
-          document.getElementById("run").onclick = () => {
-            alert(greet("Manh Bui"));
-          };
+          alert(greet("Manh Bui"));
         }
         run();
       } catch (error) {
