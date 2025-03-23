@@ -94,18 +94,14 @@ function greet(name) {
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
-        alert(WebAssembly.instantiateStreaming ? "Supported" : "Not supported");
         if (typeof WebAssembly.instantiateStreaming === 'function') {
             try {
                 return await WebAssembly.instantiateStreaming(module, imports);
 
             } catch (e) {
-                if (module.headers.get('Content-Type') != 'application/wasm') {
-                    console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve Wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
-
-                } else {
-                    throw e;
-                }
+                alert(e)
+                const bytes = await module.arrayBuffer();
+                return await WebAssembly.instantiate(bytes, imports);
             }
         }
 
@@ -193,7 +189,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = 'my_wasm_project_bg.wasm?v=3';
+        module_or_path = 'my_wasm_project_bg.wasm?v=5';
     }
     const imports = __wbg_get_imports();
 
@@ -209,7 +205,7 @@ async function __wbg_init(module_or_path) {
 }
 
 window.onload = function() {
-    alert("Hello world 1");
+    alert("Hello world 2");
     try {
         __wbg_init().then(function() {
             alert(greet("Manh Bui"));
