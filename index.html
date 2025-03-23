@@ -5,6 +5,21 @@
   </head>
   <body>
     <h1>Rust + Wasm</h1>
-    <script type="text/javascript" src="my_wasm_project.js?t=4"></script>
+    <script src="hello.js"></script>
+    <script>
+      try {
+        createModule().then(Module => {
+            const greet = Module.cwrap('greet', null, []);
+            const result = greet("Manh Bui");
+            alert(result)
+        }).catch(error => {
+          alert("1")
+          alert(error)
+        });
+      } catch (error) {
+        alert("2")
+        alert(error)
+      }
+    </script>
   </body>
 </html>
