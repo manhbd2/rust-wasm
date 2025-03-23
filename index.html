@@ -8,6 +8,7 @@
     <button id="run">Say Hello</button>
     <script type="module">
       import init, { greet } from "./my_wasm_project.js";
+      alert("Hello");
       try {
         async function run() {
           await init();
@@ -16,6 +17,7 @@
         run();
       } catch (error) {
         alert(error);
+        alert(error.message);
       }
     </script>
   </body>
