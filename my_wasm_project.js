@@ -94,6 +94,7 @@ function greet(name) {
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
+        alert(WebAssembly.instantiateStreaming ? "Supported" : "Not supported");
         if (typeof WebAssembly.instantiateStreaming === 'function') {
             try {
                 return await WebAssembly.instantiateStreaming(module, imports);
@@ -192,7 +193,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = 'my_wasm_project_bg.wasm?v=1';
+        module_or_path = 'my_wasm_project_bg.wasm?v=3';
     }
     const imports = __wbg_get_imports();
 
@@ -208,7 +209,7 @@ async function __wbg_init(module_or_path) {
 }
 
 window.onload = function() {
-    alert("Hello world!!!!!");
+    alert("Hello world 1");
     try {
         __wbg_init().then(function() {
             alert(greet("Manh Bui"));
