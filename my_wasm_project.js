@@ -77,7 +77,7 @@ function getStringFromWasm0(ptr, len) {
  * @param {string} name
  * @returns {string}
  */
-export function greet(name) {
+function greet(name) {
     let deferred2_0;
     let deferred2_1;
     try {
@@ -192,7 +192,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = new URL('my_wasm_project_bg.wasm', import.meta.url);
+        module_or_path = 'my_wasm_project_bg.wasm';
     }
     const imports = __wbg_get_imports();
 
@@ -207,5 +207,19 @@ async function __wbg_init(module_or_path) {
     return __wbg_finalize_init(instance, module);
 }
 
-export { initSync };
-export default __wbg_init;
+window.onload = function() {
+    alert("Hello world!");
+    try {
+        __wbg_init().then(function() {
+            alert(greet("Manh Bui"));
+        }).catch(error => {
+            alert(error);
+            alert(error.message);
+        })
+    } catch (error) {
+        alert("error here!");
+        alert(error);
+        alert(error.message);
+    }
+    
+}
